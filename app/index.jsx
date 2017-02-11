@@ -1,9 +1,8 @@
-import React from "react"
-import ReactDOM from "react-dom"
-import GithubRepos from "./components/GithubRepos"
+import React from 'react'
+import ReactDOM from 'react-dom'
+import GoogleMapsExample from './examples/GoogleMapsExample'
 
 ReactDOM.render(
-  <GithubRepos username="drborges" />,
-  document.getElementById("app")
+  <GoogleMapsExample />,
+  document.getElementById('google-maps-example'),
 )
-
