@@ -1,5 +1,6 @@
 module.exports = {
   entry: ["babel-polyfill", "./app/index.jsx"],
+  devtool: 'eval-source-map',
   output: {
     filename: "bundle.js"
   },
@@ -12,4 +13,3 @@ module.exports = {
     ]
   }
 }
-
