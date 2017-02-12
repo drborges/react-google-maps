@@ -1,4 +1,5 @@
 import React from 'react'
+import Show from '../Show'
 
 class Map extends React.Component {
   state = {}
@@ -23,7 +24,9 @@ class Map extends React.Component {
   render() {
     return (
       <section id={this.props.id}>
-        {!this.state.map ? null : React.cloneElement(this.props.children, { map: this.state.map })}
+        <Show onlyIf={this.state.map}>
+          {React.cloneElement(this.props.children, { map: this.state.map })}
+        </Show>
       </section>
     )
   }
