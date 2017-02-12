@@ -19,6 +19,7 @@ class Script extends React.Component {
     id: "script-target",
     async: true,
     defer: true,
+    charset: "",
     type: "text/javascript",
     onLoad: () => {},
     onError: () => {},
