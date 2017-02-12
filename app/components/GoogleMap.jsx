@@ -8,7 +8,7 @@ class GoogleMap extends React.Component {
 
   render() {
     return (
-      <div id="map"></div>
+      <section id="map"></section>
     )
   }
 }
