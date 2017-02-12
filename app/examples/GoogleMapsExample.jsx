@@ -16,7 +16,7 @@ const GoogleMapsExample = (props) => (
         destination="oklahoma city, ok"
         travelMode="DRIVING"
       />
-  </GoogleMaps.Map>
+    </GoogleMaps.Map>
   </Script>
 )
 
