@@ -1,4 +1,5 @@
 import React from 'react'
+import ReactDOM from 'react-dom'
 import Show from './Show'
 
 class Script extends React.Component {
@@ -9,14 +10,13 @@ class Script extends React.Component {
     charset: React.PropTypes.string,
     crossorigin: React.PropTypes.string,
     defer: React.PropTypes.bool,
-    type: React.PropTypes.string,
     onLoad: React.PropTypes.func,
     onError: React.PropTypes.func,
+    type: React.PropTypes.string,
     src: React.PropTypes.string.isRequired,
   }
 
   static defaultProps = {
-    id: "script-target",
     async: true,
     defer: true,
     charset: "",
@@ -36,7 +36,7 @@ class Script extends React.Component {
   }
 
   componentDidMount() {
-    const target = document.getElementById(this.props.id)
+    const target = ReactDOM.findDOMNode(this)
     const script = document.createElement("script")
     script.onload = this.handleLoad
     script.onerror = this.handleError
@@ -51,7 +51,7 @@ class Script extends React.Component {
 
   render() {
     return (
-      <section id={this.props.id}>
+      <section>
         <Show onlyIf={this.state.loaded}>
           {this.props.children}
         </Show>
