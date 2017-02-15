@@ -1,6 +1,5 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import Show from './Show'
 
 class Script extends React.Component {
   state = { loaded: false }
@@ -52,9 +51,7 @@ class Script extends React.Component {
   render() {
     return (
       <section>
-        <Show onlyIf={this.state.loaded}>
-          {this.props.children}
-        </Show>
+        {this.state.loaded ? this.props.children : null}
       </section>
     )
   }
