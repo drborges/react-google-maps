@@ -1,43 +1,38 @@
 import React from 'react'
 
-class Directions extends React.Component {
+const Directions = ({ map, origin, destination, travelMode }) => {
+  const directionsService = new google.maps.DirectionsService
+  const directionsDisplay = new google.maps.DirectionsRenderer
 
-  static propTypes = {
-    origin: React.PropTypes.string.isRequired,
-    destination: React.PropTypes.string.isRequired,
-    travelMode: React.PropTypes.oneOf([
-      'DRIVING',
-      'BICYCLING',
-      'TRANSIT',
-      'WALKING',
-    ]),
-  }
+  directionsDisplay.setMap(map)
+  directionsService.route({
+    origin: origin,
+    destination: destination,
+    travelMode: travelMode,
+  }, function(response, status) {
+    if (status === 'OK') {
+      directionsDisplay.setDirections(response);
+    } else {
+      window.alert('Directions request failed due to ' + status);
+    }
+  });
 
-  static defaultProps = {
-    travelMode: 'DRIVING',
-  }
+  return null
+}
 
-  componentDidMount() {
-    const directionsService = new google.maps.DirectionsService
-    const directionsDisplay = new google.maps.DirectionsRenderer
+Directions.propTypes = {
+  origin: React.PropTypes.string.isRequired,
+  destination: React.PropTypes.string.isRequired,
+  travelMode: React.PropTypes.oneOf([
+    'DRIVING',
+    'BICYCLING',
+    'TRANSIT',
+    'WALKING',
+  ]),
+}
 
-    directionsDisplay.setMap(this.props.map)
-    directionsService.route({
-      origin: this.props.origin,
-      destination: this.props.destination,
-      travelMode: this.props.travelMode,
-    }, function(response, status) {
-      if (status === 'OK') {
-        directionsDisplay.setDirections(response);
-      } else {
-        window.alert('Directions request failed due to ' + status);
-      }
-    });
-  }
-
-  render() {
-    return <section />
-  }
+Directions.defaultProps = {
+  travelMode: 'DRIVING',
 }
 
 export default Directions
