@@ -1,15 +1,20 @@
 import React from 'react'
 
-const Directions = ({ map, origin, destination, travelMode }) => {
+const Directions = (props) => {
   const directionsService = new google.maps.DirectionsService
-  const directionsDisplay = new google.maps.DirectionsRenderer
+  const directionsDisplay = new google.maps.DirectionsRenderer({
+    ...props,
+  })
 
-  directionsDisplay.setMap(map)
+  directionsDisplay.addListener('directions_changed', () => {
+    props.onChange(directionsDisplay.getDirections())
+  })
+
   directionsService.route({
-    origin: origin,
-    destination: destination,
-    travelMode: travelMode,
-  }, function(response, status) {
+    origin: props.origin,
+    destination: props.destination,
+    travelMode: props.travelMode,
+  }, (response, status) => {
     if (status === 'OK') {
       directionsDisplay.setDirections(response);
     } else {
@@ -23,6 +28,7 @@ const Directions = ({ map, origin, destination, travelMode }) => {
 Directions.propTypes = {
   origin: React.PropTypes.string.isRequired,
   destination: React.PropTypes.string.isRequired,
+  onChange: React.PropTypes.func,
   travelMode: React.PropTypes.oneOf([
     'DRIVING',
     'BICYCLING',
@@ -33,6 +39,7 @@ Directions.propTypes = {
 
 Directions.defaultProps = {
   travelMode: 'DRIVING',
+  onChange: () => {},
 }
 
 export default Directions

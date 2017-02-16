@@ -12,15 +12,19 @@ const GoogleMapsExample = (props) => (
     >
       <GoogleMaps.Directions
         key={0}
+        draggable={true}
         origin="chicago, il"
         destination="oklahoma city, ok"
         travelMode="DRIVING"
+        onChange={directions => console.log(directions)}
       />
       <GoogleMaps.Directions
         key={1}
+        draggable={true}
         origin="chicago, il"
         destination="philadelphia, pa"
         travelMode="DRIVING"
+        onChange={directions => console.log(directions)}
       />
     </GoogleMaps.Map>
   </Script>
