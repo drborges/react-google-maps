@@ -1,32 +1,34 @@
 import React from 'react'
-import Show from '../Show'
+import ReactDOM from 'react-dom'
 
 class Map extends React.Component {
   state = {}
 
   static propTypes = {
-    id: React.PropTypes.string,
     onLoad: React.PropTypes.func,
   }
 
   static defaultProps = {
-    id: "map",
     onLoad: () => {},
   }
 
   componentDidMount() {
-    const viewport = document.getElementById(this.props.id)
+    const viewport = ReactDOM.findDOMNode(this)
     const map = new google.maps.Map(viewport, {...this.props})
-    this.props.onLoad(map)
+
     this.setState({ map })
+    this.props.onLoad(map)
   }
 
   render() {
+    const shouldShowChildren = (this.state.map !== undefined && this.props.children !== undefined)
+    const children = !shouldShowChildren ? null : this.props.children.map((child, i) =>
+      React.cloneElement(child, { map: this.state.map })
+    )
+
     return (
-      <section id={this.props.id}>
-        <Show onlyIf={this.state.map}>
-          {React.cloneElement(this.props.children, { map: this.state.map })}
-        </Show>
+      <section className="google-maps-map">
+        {children}
       </section>
     )
   }
