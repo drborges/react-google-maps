@@ -13,6 +13,7 @@ const Directions = (props) => {
   directionsService.route({
     origin: props.origin,
     waypoints: props.waypoints,
+    optimizeWaypoints: props.optimizeWaypoints,
     destination: props.destination,
     travelMode: props.travelMode,
   }, (response, status) => {

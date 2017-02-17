@@ -28,6 +28,7 @@ const GoogleMapsExample = (props) => {
           key={1}
           draggable={true}
           waypoints={waypoints}
+          optimizeWaypoints={true}
           origin="chicago, il"
           destination="oklahoma city, ok"
           travelMode="DRIVING"
