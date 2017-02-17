@@ -3,6 +3,15 @@ import Script from '../components/Script'
 import GoogleMaps from '../components/google-maps'
 
 const GoogleMapsExample = (props) => {
+  const path = [
+    {lat: 36.579, lng: -118.292}, // Mt. Whitney
+    {lat: 36.606, lng: -118.0638},// Lone Pine
+    {lat: 36.433, lng: -117.951}, // Owens Lake
+    {lat: 36.588, lng: -116.943}, // Beatty Junction
+    {lat: 36.34,  lng: -117.468},  // Panama Mint Springs
+    {lat: 36.24,  lng: -116.832},  // Badwater, Death Valley
+  ]
+
   const waypoints = [
     { location: "New York, NY", stopover: true },
     { location: "Atlanta, GE",  stopover: true },
@@ -33,6 +42,14 @@ const GoogleMapsExample = (props) => {
           destination="oklahoma city, ok"
           travelMode="DRIVING"
           onChange={directions => console.log(directions)}
+        />
+
+        <GoogleMaps.Polyline
+          key={2}
+          path={path}
+          strokeColor="#0000CC"
+          strokeOpacity={0.4}
+          onLoad={polyline => console.log(polyline)}
         />
       </GoogleMaps.Map>
     </Script>
