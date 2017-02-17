@@ -9,7 +9,16 @@ class Map extends React.Component {
   }
 
   static defaultProps = {
+    map: null,
+    children: [],
     onLoad: () => {},
+  }
+
+  renderChildrenWithMapInstance = () => {
+    const children = [].concat.apply([], [this.props.children])
+    return children.map((child, i) =>
+      React.cloneElement(child, { map: this.state.map })
+    )
   }
 
   componentDidMount() {
@@ -21,10 +30,7 @@ class Map extends React.Component {
   }
 
   render() {
-    const shouldShowChildren = (this.state.map !== undefined && this.props.children !== undefined)
-    const children = !shouldShowChildren ? null : this.props.children.map((child, i) =>
-      React.cloneElement(child, { map: this.state.map })
-    )
+    const children = !this.state.map ? null : this.renderChildrenWithMapInstance()
 
     return (
       <section className="google-maps-map">
