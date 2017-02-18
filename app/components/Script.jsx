@@ -45,7 +45,7 @@ class Script extends React.Component {
     script.charset = this.props.charset
     script.crossorigin = this.props.crossorigin
     script.setAttribute("src", this.props.src)
-    target.appendChild(script)
+    target.prepend(script)
   }
 
   render() {
