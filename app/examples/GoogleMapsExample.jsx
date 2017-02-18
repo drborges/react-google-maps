@@ -51,6 +51,12 @@ const GoogleMapsExample = (props) => {
           strokeOpacity={0.4}
           onLoad={polyline => console.log(polyline)}
         />
+
+        <GoogleMaps.Marker
+          key={3}
+          draggable={true}
+          position={{lat: 40.714, lng: -74.006}}
+        />
       </GoogleMaps.Map>
     </Script>
   )
